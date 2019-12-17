@@ -9,10 +9,9 @@ All rights reserved.
 """
 
 import time
+from pyfingerprint.pyfingerprint import PyFingerprint
 #alterado
 import sqlite3
-from pyfingerprint.pyfingerprint import PyFingerprint
-
 
 ## Enrolls new finger
 ##
@@ -27,7 +26,7 @@ try:
 except Exception as e:
     print('The fingerprint sensor could not be initialized!')
     print('Exception message: ' + str(e))
-    input('Hit enter to exit')
+    time.sleep(5)
     exit(1)
 
 ## Gets some sensor information
@@ -50,7 +49,7 @@ try:
 
     if ( positionNumber >= 0 ):
         print('Template already exists at position #' + str(positionNumber))
-        input('Hit enter to exit')
+        time.sleep(5)
         exit(0)
 
     print('Remove finger...')
@@ -81,7 +80,7 @@ try:
     #alterado
     
     #metodo de atualizar banco
-    url = '/home/pi/git-batch/projeto-fechadura/Projeto-Fechadura/User-Interface/Alternate-GUI/optima.db'
+    url = '/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/optima.db'
     conn = sqlite3.connect(url)
     cursor = conn.cursor()
     try:
@@ -108,11 +107,13 @@ try:
         WHERE pos_number IS NULL
         """, (positionNumber,))
         print("data successfully updated")
+        conn.commit()
+        conn.close()
         
-    input('Hit enter to exit')
+    time.sleep(5)
 
 except Exception as e:
     print('Operation failed!')
     print('Exception message: ' + str(e))
-    input('Hit enter to exit')
+    time.sleep(5)
     exit(1)

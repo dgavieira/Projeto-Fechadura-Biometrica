@@ -1,0 +1,10 @@
+17/12/2019 09:03:19 - tela04 - INFO -- First Name: Diego 	Last Name: Vieira 	Title: dev 	Admin:NO
+17/12/2019 09:31:22 - tela04 - INFO -- First Name: Leonardo 	Last Name: Arcanjo 	Title: Técnico 	Admin:YES
+17/12/2019 09:33:30 - tela04 - INFO -- First Name: Leonardo 	Last Name: Arcanjo 	Title: Técnico 	Admin:YES
+17/12/2019 09:37:31 - tela04 - INFO -- First Name: Leonardo 	Last Name: Arcanjo 	Title: Técnico 	Admin:YES
+17/12/2019 09:38:08 - tela04 - INFO -- First Name: Diego 	Last Name: Vieira 	Title: dev 	Admin:NO
+17/12/2019 09:38:08 - tela04 - INFO -- First Name: Diego 	Last Name: Vieira 	Title: dev 	Admin:NO
+17/12/2019 09:42:08 - tela04 - INFO -- First Name: Leonardo 	Last Name: Arcanjo 	Title: Técnico 	Admin:YES
+17/12/2019 09:44:47 - tela04 - INFO -- First Name: leonardo 	Last Name: arcanjo 	Title: técnico 	Admin:YES
+17/12/2019 09:45:27 - tela04 - INFO -- First Name: diego 	Last Name: vieira 	Title: dev 	Admin:NO
+17/12/2019 09:45:27 - tela04 - INFO -- First Name: diego 	Last Name: vieira 	Title: dev 	Admin:NO
