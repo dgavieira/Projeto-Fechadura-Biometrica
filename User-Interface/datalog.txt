@@ -8,3 +8,6 @@
 17/12/2019 09:44:47 - tela04 - INFO -- First Name: leonardo 	Last Name: arcanjo 	Title: técnico 	Admin:YES
 17/12/2019 09:45:27 - tela04 - INFO -- First Name: diego 	Last Name: vieira 	Title: dev 	Admin:NO
 17/12/2019 09:45:27 - tela04 - INFO -- First Name: diego 	Last Name: vieira 	Title: dev 	Admin:NO
+18/12/2019 10:56:45 - tela04 - INFO -- First Name: Leonardo 	Last Name: Arcanjo 	Title: Técnico 	Admin:YES
+18/12/2019 14:08:45 - tela04 - INFO -- First Name: Eduardo 	Last Name: Cotta 	Title: Professor 	Admin:YES
+18/12/2019 14:27:02 - tela04 - INFO -- First Name: Thalisson 	Last Name: Torres 	Title: Mestrando 	Admin:NO

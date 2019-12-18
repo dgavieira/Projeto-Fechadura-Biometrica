@@ -51,7 +51,7 @@ def telaoito():
                                     width = 18, height = 5, command = self.ScrollDown)
             self.BotaoDown.grid(row = 1, column = 2, sticky = NW)
             
-            self.BotaoQuit = Button(master, text = 'QUIT', font = self.fontePadrao,
+            self.BotaoQuit = Button(master, text = 'QUIT', font = ['Arial', '10', 'bold'],
                                     width = 18, height = 3, command = self.toQuit)
             self.BotaoQuit.grid(row = 2, column = 2, sticky = SW)
             
@@ -75,8 +75,8 @@ def telaoito():
             keyboard.release(Key.down)
         
         def fetchData(self): #Funcao para busca dos nomes das pessoas que estao no LAB
-            #Abrir o arquivo datalog.txt em modo leitura
-            arquivo = open('/home/pi/git-batch/projeto-fechadura/Projeto-Fechadura/Testes/controle.txt', 'r')
+            #Abrir o arquivo Control.txt em modo leitura
+            arquivo = open('/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/Control.txt', 'r')
             
             #vetores de apoio para armazenamento dos dados de leitura do datalog.txt
             vetor_status = []
@@ -111,16 +111,20 @@ def telaoito():
             
             now = datetime.now()
             hora = now.strftime("%d/%m/%Y %H:%M:%S")
-            arquivo = open('/home/pi/git-batch/projeto-fechadura/Projeto-Fechadura/Testes/datalog.txt', 'a')
+            arquivo = open('/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/Stream.txt', 'a')
             arquivo.writelines(str(vetor_nome[idx]) + " " + str(vetor_sobrenome[idx]) + " " + str(vetor_cargo[idx]) + " " + hora + " Saida" + "\n")
             
             arquivo.flush()
             arquivo.close()
             
-            arquivo_controle = open('/home/pi/git-batch/projeto-fechadura/Projeto-Fechadura/Testes/datalog.txt', 'w')
+            j = 0
+            arquivo_controle = open('Control.txt', 'w')
             for i in vetor_nome:
-                if (i != idx):
-                    arquivo_controle.writelines(str(vetor_nome[idx]) + " " + str(vetor_sobrenome[idx]) + " " + str(vetor_cargo[idx]) + '\n')
+                if (i != vetor_nome[idx]):
+                    arquivo_controle.writelines(str(vetor_nome[j]) + " " + str(vetor_sobrenome[j]) + " " + str(vetor_cargo[j]) + '\n')
+                j += 1
+            
+            arquivo_controle.close()
             
             #método para apagar na lista/scroll bar
             self.lista.delete(idx)
