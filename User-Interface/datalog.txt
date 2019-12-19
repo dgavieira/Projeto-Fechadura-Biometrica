@@ -11,3 +11,6 @@
 18/12/2019 10:56:45 - tela04 - INFO -- First Name: Leonardo 	Last Name: Arcanjo 	Title: Técnico 	Admin:YES
 18/12/2019 14:08:45 - tela04 - INFO -- First Name: Eduardo 	Last Name: Cotta 	Title: Professor 	Admin:YES
 18/12/2019 14:27:02 - tela04 - INFO -- First Name: Thalisson 	Last Name: Torres 	Title: Mestrando 	Admin:NO
+19/12/2019 14:14:56 - tela04 - INFO -- First Name: Leo 	Last Name: Arcanjo 	Title: Mestrando 	Admin:NO
+19/12/2019 14:15:31 - tela04 - INFO -- First Name: Manoel 	Last Name: Leonardo 	Title: Idoso 	Admin:YES
+19/12/2019 14:15:31 - tela04 - INFO -- First Name: Manoel 	Last Name: Leonardo 	Title: Idoso 	Admin:YES

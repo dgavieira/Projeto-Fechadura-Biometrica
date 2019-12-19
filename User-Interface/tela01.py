@@ -7,9 +7,6 @@
 #!/usr/local/bin/python
 # -*- coding: utf-8 -*-
 
-import RPi.GPIO as gpio
-import time
-
 try:
     # for Python2
     from Tkinter import *
@@ -58,13 +55,6 @@ def telaum():
         tela02.teladois()
     
     def openDoor(): #envia sinal para destravar a trava quando pressionado "OPEN THE DOOR"
-        gpio.setmode(gpio.BOARD)
-        gpio.setup(40,gpio.OUT)
-        gpio.output(40,gpio.HIGH)
-        time.sleep(1)
-        gpio.output(40,gpio.LOW)
-        time.sleep(0.5)
-        gpio.cleanup()
         fechar()
         tela08.telaoito()
     

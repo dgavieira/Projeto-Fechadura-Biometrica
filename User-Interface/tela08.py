@@ -18,6 +18,7 @@ except ImportError:
 from pynput.keyboard import Key, Controller
 import sqlite3, readline
 import RPi.GPIO as gpio
+import time
 from datetime import datetime
 
 import tela01
@@ -130,24 +131,22 @@ def telaoito():
             self.lista.delete(idx)
             
             #falta acrescentar as demais coisas
+            gpio.setmode(gpio.BOARD)
+            gpio.setup(40,gpio.OUT)
+            gpio.output(40,gpio.HIGH)
+            time.sleep(1)
+            gpio.output(40,gpio.LOW)
+            time.sleep(0.5)
+            gpio.cleanup()
             
-            
-            
-            """gpio.setmode(gpio.BOARD)
-                gpio.setup(40,gpio.OUT)
-                gpio.output(40,gpio.HIGH)
-                time.sleep(1)
-                gpio.output(40,gpio.LOW)
-                time.sleep(0.5)
-                gpio.cleanup()"""
-            #pass
-        
+            #funcao para voltar para a tela01
+            time.sleep(1)
+            backToMain()
             
     def backToMain():
         root.destroy()
         tela01.telaum()
         
-    
     root = Tk()
     ScreenEight(root)
     root.title("Checkout Screen")
