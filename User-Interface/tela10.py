@@ -18,7 +18,7 @@ from pyfingerprint.pyfingerprint import PyFingerprint
 import time
 import tela01
 
-
+i = 0
 def teladez():
     class ScreenTen:
         def __init__(self, master = None):
@@ -39,46 +39,52 @@ def teladez():
             self.texto["height"] = 13
             self.texto.pack()
             
+            #self.connectSensor()
+            
+            self.widget2.after(1000, self.connectSensor) #this method calls the funcion connectSensor after 1 second.
+            
+        def connectSensor(self):
             self.texto.insert(END, "Initializing the sensor\n")
             
-            self.connectSensor()
-            
-        def connectSensor(self):            
             try:
                 f = PyFingerprint('/dev/ttyUSB0', 57600, 0xFFFFFFFF, 0x00000000)
                 msg = "Sensor Fingerprint Connected\n"
                 self.texto.insert(END, msg)
-
+                
+                msg = 'Waiting for finger...\n'
+                self.texto.insert(END, msg)
+                    
+                try:
+                    while f.readImage() == False:
+                        pass
+                
+                    f.convertImage(0x01)
+                
+                    result = f.searchTemplate()
+                
+                    positionIndex = result[0]
+                
+                    if (positionIndex == -1):
+                        msg = 'No match found!!!\n'
+                        self.texto.insert(END, msg)
+                    else:
+                        msg = 'Found template at position #'+ str(positionIndex)+"\n"
+                        self.texto.insert(END, msg)
+                        #DBAcess(positionIndex)
+                        #writeDatalog()
+                        #fechar()
+                
+                except Exception as e:
+                    msg = 'Operation Failed!!!\nError: '+ str(e)+'\n'
+                    self.texto.insert(END, msg)
+    
+                    
             except Exception as e:
                 msg = "Sensor Fingerprint could not be initialized!!!\nError: " + str(e) + "\n"
                 self.texto.insert(END, msg)
             
-            """try:
-                msg = 'Waiting for finger...\n'
-                self.texto.insert(END, msg)
-                
-                while(f.readImage() == False):
-                    pass
-                
-                f.convertImage(0x01)
-                
-                result = f.searchTemplate()
-                
-                positionIndex = result[0]
-                
-                if (positionIndex == -1):
-                    msg = 'No match found!!!\n'
-                    self.texto.insert(END, msg)
-                else:
-                    msg = 'Found template at position #'+ str(positionIndex)+"\n"
-                    self.texto.insert(END, msg)
-                    #DBAcess(positionIndex)
-                    #writeDatalog()
-                    #fechar()
-            except Exception as e:
-                msg = 'Operation Failed!!!\nError: '+ str(e)+'\n'
-                #self.texto.insert(END, msg)"""
-    
+            self.widget2.after_cancel(self.connectSensor)
+            
     def fechar():
         root.destroy()
         tela01.telaum()
