@@ -15,10 +15,10 @@ except:
     from tkinter import *
     
 from pyfingerprint.pyfingerprint import PyFingerprint
-import time
-import tela01
+from datetime import datetime
+import RPi.GPIO as gpio
+import sqlite3, time, tela01
 
-i = 0
 def teladez():
     class ScreenTen:
         def __init__(self, master = None):
@@ -39,11 +39,10 @@ def teladez():
             self.texto["height"] = 13
             self.texto.pack()
             
-            #self.connectSensor()
-            
             self.widget2.after(1000, self.connectSensor) #this method calls the funcion connectSensor after 1 second.
             
         def connectSensor(self):
+            #this function tries to connect the Fingerprint sensor e shows message of confirmation or not
             self.texto.insert(END, "Initializing the sensor\n")
             
             try:
@@ -53,7 +52,7 @@ def teladez():
                 
                 msg = 'Waiting for finger...\n'
                 self.texto.insert(END, msg)
-                    
+                            
                 try:
                     while f.readImage() == False:
                         pass
@@ -68,26 +67,66 @@ def teladez():
                         msg = 'No match found!!!\n'
                         self.texto.insert(END, msg)
                     else:
-                        msg = 'Found template at position #'+ str(positionIndex)+"\n"
-                        self.texto.insert(END, msg)
-                        #DBAcess(positionIndex)
-                        #writeDatalog()
-                        #fechar()
-                
+                        self.DBAcess(positionIndex)
+            
                 except Exception as e:
                     msg = 'Operation Failed!!!\nError: '+ str(e)+'\n'
                     self.texto.insert(END, msg)
-    
                     
             except Exception as e:
                 msg = "Sensor Fingerprint could not be initialized!!!\nError: " + str(e) + "\n"
                 self.texto.insert(END, msg)
             
-            self.widget2.after_cancel(self.connectSensor)
+            unlockDoor()
             
+            self.widget2.after(3000, fechar)
+                
+        def DBAcess(self, index):
+            #this function connects optima DB and searches the user associated to fingerprint index
+            #and salves the user's entry in Stream.txt file
+            conn = sqlite3.connect("optima.db")
+            cursor = conn.cursor()
+            cursor.execute("""SELECT
+                        first_name AS FIRST_NAME,
+                        last_name AS LAST_NAME,
+                        title AS TITLE
+                        FROM optima WHERE pos_number=?""", (str(index)))
+            rows = cursor.fetchall()
+        
+            conn.commit()
+            conn.close()
+        
+            for row in rows:
+                continue
+                
+            msg = "Bem vindo " + str(row[0]) + " " + str(row[1])
+            self.texto.insert(END, msg)
+            
+            now = datetime.now()
+            hora = now.strftime("%d/%m/%Y %H:%M:%S")
+            arquivo = open('Stream.txt', 'a')
+            arquivo.writelines(str(row[0]) + " " + str(row[1]) + " " + str(row[2]) + " " + hora
+                               + " Entrada\n")
+            arquivo.flush()
+            arquivo.close()
+            
+            arquivo_controle = open('Control.txt', 'a')
+            arquivo_controle.writelines(str(row[0]) + " " + str(row[1]) + " " + str(row[2]) + "\n")
+            arquivo_controle.flush()
+            arquivo_controle.close()
+    
     def fechar():
         root.destroy()
         tela01.telaum()
+    
+    def unlockDoor():
+        gpio.setmode(gpio.BOARD)
+        gpio.setup(40, gpio.OUT)
+        gpio.output(40, gpio.HIGH)
+        time.sleep(1)
+        gpio.output(40, gpio.LOW)
+        time.sleep(0.5)
+        gpio.cleanup()
     
     root = Tk()
     ScreenTen(root)
