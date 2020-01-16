@@ -32,7 +32,7 @@ def telatres():
             self.button1["text"] = "ENROLL"
             self.button1["font"] = fontePadrao
             self.button1["width"] = 30
-            self.button1["height"] = 3
+            self.button1["height"] = 2
             self.button1["command"] = doublefuncenroll
             self.button1.pack()
 
@@ -43,12 +43,21 @@ def telatres():
             
             #construtor do botao EXIT
             self.button3 = Button(self.widget1)
-            self.button3["text"] = "EXIT"
+            self.button3["text"] = "CANCEL"
             self.button3["font"] = fontePadrao
             self.button3["width"] = 30
-            self.button3["height"] = 2
+            self.button3["height"] = 1
             self.button3["command"] = doublefuncexit
             self.button3.pack()
+            
+            #construtor do botao CANCEL
+            self.button4 = Button(self.widget1)
+            self.button4['text'] = "EXIT"
+            self.button4['font'] = fontePadrao
+            self.button4['width'] = 30
+            self.button4['height'] = 1
+            self.button4['command'] = fechar
+            self.button4.pack()
          
     #metodos da tela 03 - destroem tela atual e abrem tela referente de acordo com o fluxo da UI
 

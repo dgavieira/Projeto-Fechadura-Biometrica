@@ -14,3 +14,7 @@
 19/12/2019 14:14:56 - tela04 - INFO -- First Name: Leo 	Last Name: Arcanjo 	Title: Mestrando 	Admin:NO
 19/12/2019 14:15:31 - tela04 - INFO -- First Name: Manoel 	Last Name: Leonardo 	Title: Idoso 	Admin:YES
 19/12/2019 14:15:31 - tela04 - INFO -- First Name: Manoel 	Last Name: Leonardo 	Title: Idoso 	Admin:YES
+16/01/2020 11:35:26 - tela04 - INFO -- First Name: Leonardo 	Last Name: Arcanjo 	Title: Técnico 	Admin:YES
+16/01/2020 11:36:10 - tela04 - INFO -- First Name: Manoel 	Last Name: Leonardo 	Title: Tecnico 	Admin:YES
+16/01/2020 11:36:10 - tela04 - INFO -- First Name: Manoel 	Last Name: Leonardo 	Title: Tecnico 	Admin:YES
+16/01/2020 11:49:32 - tela04 - INFO -- First Name: Leonardo 	Last Name: Arcanjo 	Title: Técnico 	Admin:YES

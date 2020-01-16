@@ -29,7 +29,7 @@ def telaum():
             self.button1 = Button(self.widget1)
             self.button1["text"] = "OPTIONS"
             self.button1["font"] = fontePadrao
-            self.button1["height"] = 2
+            self.button1["height"] = 3
             self.button1["command"] = doublefuncoptions
             self.button1.pack(side = TOP, fill=X)
 
@@ -37,17 +37,10 @@ def telaum():
             self.button2 = Button(self.widget1)
             self.button2["text"] = "OPEN THE DOOR"
             self.button2["font"] = fontePadrao
-            self.button2["height"] = 2
+            self.button2["height"] = 4
             self.button2["command"] = openDoor
             self.button2.pack(side = TOP, fill=X)
 
-            #construtor do botao CANCEL
-            self.button3 = Button(self.widget1)
-            self.button3["text"] = "CANCEL"
-            self.button3["font"] = fontePadrao
-            self.button3["height"] = 4
-            self.button3["command"] = fechar
-            self.button3.pack(side = TOP, fill=X)
 
     #metodos
     def doublefuncoptions(): #chama transição para tela dois

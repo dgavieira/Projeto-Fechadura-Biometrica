@@ -147,13 +147,13 @@ def telaseis():
             
             try:
                 self.apagaIndex(int(vetor_aux[0]))#Deleting the fingerprint by Index in Sensor
+                
+                cursor.execute("""DELETE FROM optima WHERE member_id=?""",(str(vetor[numIdx])))
+                
+                conn.commit()
+                conn.close()
             except TypeError:
                 print("Nao ha index associado a este usuario")
-            
-            cursor.execute("""DELETE FROM optima WHERE member_id=?""",(str(vetor[numIdx])))
-                    
-            conn.commit()
-            conn.close()
             
                         
         def fetch_data(self): #database query main loop
