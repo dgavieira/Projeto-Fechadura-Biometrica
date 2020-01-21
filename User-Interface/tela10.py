@@ -84,7 +84,7 @@ def teladez():
         def DBAcess(self, index):
             #this function connects optima DB and searches the user associated to fingerprint index
             #and salves the user's entry in Stream.txt file
-            conn = sqlite3.connect("optima.db")
+            conn = sqlite3.connect("/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/optima.db")
             cursor = conn.cursor()
             cursor.execute("""SELECT
                         first_name AS FIRST_NAME,
@@ -104,13 +104,13 @@ def teladez():
             
             now = datetime.now()
             hora = now.strftime("%d/%m/%Y %H:%M:%S")
-            arquivo = open('Stream.txt', 'a')
+            arquivo = open('/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/Stream.txt', 'a')
             arquivo.writelines(str(row[0]) + " " + str(row[1]) + " " + str(row[2]) + " " + hora
                                + " Entrada\n")
             arquivo.flush()
             arquivo.close()
             
-            arquivo_controle = open('Control.txt', 'a')
+            arquivo_controle = open('/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/Control.txt', 'a')
             arquivo_controle.writelines(str(row[0]) + " " + str(row[1]) + " " + str(row[2]) + "\n")
             arquivo_controle.flush()
             arquivo_controle.close()

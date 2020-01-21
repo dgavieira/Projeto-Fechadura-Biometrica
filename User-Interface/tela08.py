@@ -99,6 +99,8 @@ def telaoito():
             
             #nao esquecer JAMAIS, NUNCA em HIPOTESE ALGUMA de fechar o arquivo
             arquivo.close()
+            
+            self.lista.focus_set()
         
         def toQuit(self):
             #esse metodo retorna uma lista com os items da lista/scroll bar
@@ -119,7 +121,7 @@ def telaoito():
             arquivo.close()
             
             j = 0
-            arquivo_controle = open('Control.txt', 'w')
+            arquivo_controle = open('/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/Control.txt', 'w')
             for i in vetor_nome:
                 if (i != vetor_nome[idx]):
                     arquivo_controle.writelines(str(vetor_nome[j]) + " " + str(vetor_sobrenome[j]) + " " + str(vetor_cargo[j]) + '\n')

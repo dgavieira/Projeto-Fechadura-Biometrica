@@ -21,7 +21,7 @@ import tela01, tela05, tela06
 import sqlite3, logging, time
 
 #cria arquivo de banco de dados e cursor
-conn = sqlite3.connect('optima.db')
+conn = sqlite3.connect('/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/optima.db')
 cursor = conn.cursor()
 
 #formata tabela
