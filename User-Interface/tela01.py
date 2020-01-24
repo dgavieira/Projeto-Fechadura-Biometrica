@@ -14,7 +14,7 @@ except ImportError:
     # for Python3
     from tkinter import *
 
-import tela02, tela08 #importa as telas seguintes
+import tela02, tela08, tela10 #importa as telas seguintes
 
 def telaum():
     class ScreenOne:

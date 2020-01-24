@@ -50,3 +50,5 @@ kadu brito visitante 20/01/2020 09:13:39 Entrada
 manoel leonardo mestrando 20/01/2020 09:14:13 Saida
 kadu brito visitante 20/01/2020 11:05:54 Saida
 leonardo arcanjo técnico 20/01/2020 11:08:55 Saida
+leonardo arcanjo técnico 23/01/2020 11:02:01 Entrada
+leonardo arcanjo técnico 24/01/2020 09:12:06 Saida
