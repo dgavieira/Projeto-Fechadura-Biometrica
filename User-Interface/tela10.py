@@ -39,43 +39,39 @@ def teladez():
             self.texto["height"] = 13
             self.texto.pack()
             
+            self.texto.insert(END, "Initializing the sensor\n")
+            
             self.widget2.after(1000, self.connectSensor) #this method calls the funcion connectSensor after 1 second.
             
         def connectSensor(self):
             #this function tries to connect the Fingerprint sensor e shows message of confirmation or not
-            self.texto.insert(END, "Initializing the sensor\n")
             
-            try:
-                f = PyFingerprint('/dev/ttyUSB0', 57600, 0xFFFFFFFF, 0x00000000)
+            f = PyFingerprint('/dev/ttyUSB0', 57600, 0xFFFFFFFF, 0x00000000)
+            
+            if (f.verifyPassword() == True):
                 msg = "Sensor Fingerprint Connected\n"
                 self.texto.insert(END, msg)
-                
-                msg = 'Waiting for finger...\n'
+            else:
+                msg = "Sensor Fingerprint not Connected\n"
                 self.texto.insert(END, msg)
-                            
-                try:
-                    while f.readImage() == False:
-                        pass
-                
-                    f.convertImage(0x01)
-                
-                    result = f.searchTemplate()
-                
-                    positionIndex = result[0]
-                
-                    if (positionIndex == -1):
-                        msg = 'No match found!!!\n'
-                        self.texto.insert(END, msg)
-                    else:
-                        self.DBAcess(positionIndex)
             
-                except Exception as e:
-                    msg = 'Operation Failed!!!\nError: '+ str(e)+'\n'
-                    self.texto.insert(END, msg)
-                    
-            except Exception as e:
-                msg = "Sensor Fingerprint could not be initialized!!!\nError: " + str(e) + "\n"
+            msg = "Waiting for finger...\n"
+            self.texto.insert(END, msg)
+                            
+            while (f.readImage() == False):
+                pass
+            
+            f.convertImage(0x01)
+            
+            result = f.searchTemplate()
+            
+            positionIndex = result[0]
+                
+            if (positionIndex == -1):
+                msg = 'No match found!!!\n'
                 self.texto.insert(END, msg)
+            else:
+                self.DBAcess(positionIndex)
             
             unlockDoor()
             
