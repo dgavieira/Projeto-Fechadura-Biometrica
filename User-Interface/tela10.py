@@ -19,6 +19,12 @@ from datetime import datetime
 import RPi.GPIO as gpio
 import sqlite3, time, tela01
 
+try:
+    f = PyFingerprint('/dev/ttyUSB0', 57600, 0xFFFFFFFF, 0x00000000)
+except Exception as e:
+    print('Exception message: ' + str(e))
+
+
 def teladez():
     class ScreenTen:
         def __init__(self, master = None):
@@ -43,39 +49,33 @@ def teladez():
             
             self.widget2.after(1000, self.connectSensor) #this method calls the funcion connectSensor after 1 second.
             
+            
         def connectSensor(self):
             #this function tries to connect the Fingerprint sensor e shows message of confirmation or not
             
-            f = PyFingerprint('/dev/ttyUSB0', 57600, 0xFFFFFFFF, 0x00000000)
-            
             if (f.verifyPassword() == True):
-                msg = "Sensor Fingerprint Connected\n"
-                self.texto.insert(END, msg)
+                self.showMessage("Sensor Connect\n")
             else:
-                msg = "Sensor Fingerprint not Connected\n"
-                self.texto.insert(END, msg)
+                self.showMessage("Sensor not Connected\n")
             
-            msg = "Waiting for finger...\n"
-            self.texto.insert(END, msg)
-                            
-            while (f.readImage() == False):
-                pass
+            self.showMessage("Waiting for finger...\n")
+                                               
+            positionIndex = readSensor()
             
-            f.convertImage(0x01)
-            
-            result = f.searchTemplate()
-            
-            positionIndex = result[0]
-                
             if (positionIndex == -1):
-                msg = 'No match found!!!\n'
-                self.texto.insert(END, msg)
+                self.showMessage("No match found!!!\n")
+                self.showMessage("Try again...\n")
+                self.connectSensor()
             else:
                 self.DBAcess(positionIndex)
             
             unlockDoor()
             
             self.widget2.after(3000, fechar)
+            
+        
+        def showMessage(self, mensagem):
+            self.texto.insert(END, mensagem)
                 
         def DBAcess(self, index):
             #this function connects optima DB and searches the user associated to fingerprint index
@@ -114,6 +114,13 @@ def teladez():
     def fechar():
         root.destroy()
         tela01.telaum()
+        
+    def readSensor():
+        while (f.readImage() == False):
+            pass
+        f.convertImage(0x01)
+        result = f.searchTemplate()
+        return result[0]
     
     def unlockDoor():
         gpio.setmode(gpio.BOARD)
