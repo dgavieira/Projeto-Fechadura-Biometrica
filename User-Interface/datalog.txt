@@ -21,3 +21,5 @@
 17/01/2020 14:41:29 - tela04 - INFO -- First Name: Manoel 	Last Name: Leonardo 	Title: Mestrando 	Admin:YES
 20/01/2020 09:01:39 - tela04 - INFO -- First Name: manoel 	Last Name: leonardo 	Title: mestrando 	Admin:NO
 21/01/2020 13:31:50 - tela04 - INFO -- First Name: leonardo 	Last Name: arcanjo 	Title: técnico 	Admin:YES
+06/02/2020 10:09:32 - tela04 - INFO -- First Name: Devid 	Last Name: Aluno 	Title: Aluno 	Admin:NO
+06/02/2020 11:26:44 - tela04 - INFO -- First Name: Leonardo 	Last Name: Arcanjo 	Title: Técnico 	Admin:YES

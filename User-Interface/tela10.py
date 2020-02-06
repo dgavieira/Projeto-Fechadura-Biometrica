@@ -19,6 +19,8 @@ from datetime import datetime
 import RPi.GPIO as gpio
 import sqlite3, time, tela01
 
+lock_pin = 40
+
 try:
     f = PyFingerprint('/dev/ttyUSB0', 57600, 0xFFFFFFFF, 0x00000000)
 except Exception as e:
@@ -124,11 +126,11 @@ def teladez():
     
     def unlockDoor():
         gpio.setmode(gpio.BOARD)
-        gpio.setup(40, gpio.OUT)
-        gpio.output(40, gpio.HIGH)
+        gpio.setup(lock_pin, gpio.OUT)
+        gpio.output(lock_pin, gpio.HIGH)
         time.sleep(1)
-        gpio.output(40, gpio.LOW)
-        time.sleep(0.5)
+        gpio.output(lock_pin, gpio.LOW)
+        time.sleep(1)
         gpio.cleanup()
     
     root = Tk()
