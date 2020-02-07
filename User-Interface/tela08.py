@@ -23,6 +23,8 @@ from datetime import datetime
 
 import tela01
 
+lock_pin = 36
+
 def telaoito():
     #vetores de apoio para armazenamento das pessoas que estao no datalog
     vetor_nome = []
@@ -134,10 +136,10 @@ def telaoito():
             
             #falta acrescentar as demais coisas
             gpio.setmode(gpio.BOARD)
-            gpio.setup(40,gpio.OUT)
-            gpio.output(40,gpio.HIGH)
+            gpio.setup(lock_pin,gpio.OUT)
+            gpio.output(lock_pin,gpio.HIGH)
             time.sleep(1)
-            gpio.output(40,gpio.LOW)
+            gpio.output(lock_pin,gpio.LOW)
             time.sleep(0.5)
             gpio.cleanup()
             

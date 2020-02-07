@@ -19,13 +19,23 @@ from datetime import datetime
 import RPi.GPIO as gpio
 import sqlite3, time, tela01
 
-lock_pin = 40
+#define os pinos do LED RGB e o pino da trava
+LED_RED = 40
+LED_GREEN = 38
+lock_pin = 36
 
 try:
     f = PyFingerprint('/dev/ttyUSB0', 57600, 0xFFFFFFFF, 0x00000000)
 except Exception as e:
     print('Exception message: ' + str(e))
 
+def acendeLed(pino_led):
+    gpio.output(pino_led, 1)
+    return
+
+def apagaLed(pino_led):
+    gpio.output(pino_led,0)
+    return
 
 def teladez():
     class ScreenTen:
@@ -47,6 +57,10 @@ def teladez():
             self.texto["height"] = 13
             self.texto.pack()
             
+            configura_GPIO() #configura os GPIO
+            
+            acendeLed(LED_RED) #acende o LED vermelho
+            
             self.texto.insert(END, "Initializing the sensor\n")
             
             self.widget2.after(1000, self.connectSensor) #this method calls the funcion connectSensor after 1 second.
@@ -67,8 +81,23 @@ def teladez():
             if (positionIndex == -1):
                 self.showMessage("No match found!!!\n")
                 self.showMessage("Try again...\n")
+                apagaLed(LED_RED)
+                time.sleep(0.5)
+                acendeLed(LED_RED)
+                time.sleep(0.5)
+                apagaLed(LED_RED)
+                time.sleep(0.5)
                 self.connectSensor()
             else:
+                apagaLed(LED_RED)
+                acendeLed(LED_GREEN)
+                time.sleep(0.5)
+                apagaLed(LED_GREEN)
+                time.sleep(0.5)
+                acendeLed(LED_GREEN)
+                time.sleep(0.5)
+                apagaLed(LED_GREEN)
+                time.sleep(0.5)
                 self.DBAcess(positionIndex)
             
             unlockDoor()
@@ -112,12 +141,19 @@ def teladez():
             arquivo_controle.writelines(str(row[0]) + " " + str(row[1]) + " " + str(row[2]) + "\n")
             arquivo_controle.flush()
             arquivo_controle.close()
+            
     
-    def fechar():
+    def fechar(): #fecha tela com o destroy e chama a tela01
         root.destroy()
         tela01.telaum()
         
-    def readSensor():
+    def configura_GPIO(): #configura o GPIO do Rasp como modo BOARD e os pinos do LED e da trava como SAIDA
+        gpio.setmode(gpio.BOARD)
+        gpio.setup(LED_RED, gpio.OUT)
+        gpio.setup(LED_GREEN, gpio.OUT)
+        gpio.setup(lock_pin, gpio.OUT)
+        
+    def readSensor(): #le a impressao digital no sensor e retorna o index associado a impressao digital 
         while (f.readImage() == False):
             pass
         f.convertImage(0x01)
@@ -125,8 +161,6 @@ def teladez():
         return result[0]
     
     def unlockDoor():
-        gpio.setmode(gpio.BOARD)
-        gpio.setup(lock_pin, gpio.OUT)
         gpio.output(lock_pin, gpio.HIGH)
         time.sleep(1)
         gpio.output(lock_pin, gpio.LOW)
