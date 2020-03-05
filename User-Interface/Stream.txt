@@ -227,3 +227,13 @@ leonardo arcanjo tecnico 11/02/2020 10:32:15 Entrada
 leonardo arcanjo tecnico 11/02/2020 10:32:22 Saida
 leonardo arcanjo tecnico 11/02/2020 10:32:38 Entrada
 leonardo arcanjo tecnico 11/02/2020 10:32:46 Saida
+eduardo cotta professor 11/02/2020 13:53:10 Entrada
+eduardo cotta professor 11/02/2020 13:53:37 Saida
+eduardo cotta professor 11/02/2020 14:00:43 Entrada
+leonardo arcanjo tecnico 11/02/2020 14:01:01 Entrada
+eduardo cotta professor 11/02/2020 14:01:26 Entrada
+eduardo cotta professor 11/02/2020 14:01:56 Saida
+leonardo arcanjo tecnico 18/02/2020 09:42:59 Saida
+leonardo arcanjo tecnico 18/02/2020 09:43:12 Entrada
+leonardo arcanjo tecnico 18/02/2020 09:43:44 Saida
+leonardo arcanjo tecnico 05/03/2020 11:22:59 Entrada
