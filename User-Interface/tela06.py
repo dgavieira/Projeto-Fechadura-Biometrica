@@ -16,13 +16,15 @@ try:
 except ImportError:
     # for Python3
     from tkinter import *
+    from tkinter import messagebox
 #importa bibliotecas utilizadas pelos metodos da classe
+
 from pynput.keyboard import Key, Controller
 import sqlite3, readline
 from pyfingerprint.pyfingerprint import PyFingerprint
 
 #importa telas que interagem com tela atual
-import tela03, tela07
+import tela03
 
 def telaseis():
     class ScreenSix:
@@ -72,12 +74,11 @@ def telaseis():
         
         
         #A funcao run_listbox_delete tem como objetivo chamar a funcao listbox_data_delete(),
-        #em seguida chamar o destrutor da tela06 para construir a tela07
+        #Caso o usuario confirme atraves a caixa de mensagem.
         def run_listbox_delete(self):
-            self.listbox_data_delete()
-            fechar()
-            tela07.telasete()
-            
+            answer = messagebox.askyesno("Confirmation", "Are you sure you want to delete?")
+            if answer == True:
+                self.listbox_data_delete()
         
         # Essa funcao, lista os dados presentes no DB e indica o indice (idx) associado ao usuário
         # em que se deseja apagar do DB
