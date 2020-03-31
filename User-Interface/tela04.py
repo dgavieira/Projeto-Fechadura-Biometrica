@@ -31,6 +31,7 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS optima (
             last_name TEXT NOT NULL,
             title TEXT NOT NULL,
             admin integer,
+            senhas TEXT,
             UNIQUE (first_name, last_name))""" #cria indexação exclusiva para evitar duplicatas
             )
 conn.commit()
@@ -40,120 +41,93 @@ def telaquatro():
     class ScreenFour:
         def __init__(self, master = None):          #construtor da tela quatro
             self.primeiroContainer = Frame(master)
-            self.primeiroContainer["pady"] = 10
-            self.primeiroContainer.pack()
-            
-            self.segundoContainer = Frame(master)
-            self.segundoContainer["padx"] = 20
-            self.segundoContainer.pack()
-            
-            self.terceiroContainer = Frame(master)
-            self.terceiroContainer["padx"] = 20
-            self.terceiroContainer.pack()
-            
-            self.quartoContainer = Frame(master)
-            self.quartoContainer["padx"] = 20
-            self.quartoContainer.pack()
-            
-            self.quintoContainer = Frame(master)
-            self.quintoContainer["padx"] = 20
-            self.quintoContainer.pack()
-            
-            self.sextoContainer = Frame(master)
-            self.sextoContainer["padx"] = 40
-            self.sextoContainer.pack()
-            
-            self.setimoContainer = Frame(master)
-            self.setimoContainer["padx"] = 60
-            self.setimoContainer.pack(fill = X, expand = YES)
-            
-            self.oitavoContainer = Frame(master)
-            self.oitavoContainer["padx"] = 60
-            self.oitavoContainer.pack()
+            self.primeiroContainer.grid(row = 0, column = 0, rowspan = 6, columnspan = 3, sticky = NW)
             
             fontePadrao = ("Arial","10")
             
-            # elementos do primeiro container
-            self.titulo = Label(self.primeiroContainer)
-            self.titulo["text"] = "ENROLL"
-            self.titulo["font"] = ("Arial", "10", "bold")
-            self.titulo.pack()
-            
-            # elementos do segundo container
-            self.firstnameLabel = Label(self.segundoContainer)
+            #First Container Elements
+            self.firstnameLabel = Label(self.primeiroContainer)
             self.firstnameLabel["text"] = "First Name"
             self.firstnameLabel["font"] = fontePadrao
-            self.firstnameLabel.pack(side=LEFT)
+            self.firstnameLabel.grid(row = 0, column = 0, padx = 10, pady = 3, sticky = NW)
             
-            self.firstname = Entry(self.segundoContainer)
-            self.firstname["width"] = 30
+            self.firstname = Entry(self.primeiroContainer)
+            self.firstname["width"] = 25
             self.firstname["font"] = fontePadrao
-            self.firstname.pack(side=LEFT)
+            self.firstname.grid(row = 0, column = 1, padx = 0, pady = 3, sticky = NW)
             
-            # elementos do terceiro container
-            self.lastnameLabel = Label(self.terceiroContainer)
+            self.lastnameLabel = Label(self.primeiroContainer)
             self.lastnameLabel["text"] = "Last Name"
             self.lastnameLabel["font"] = fontePadrao
-            self.lastnameLabel.pack(side=LEFT)
+            self.lastnameLabel.grid(row = 1, column = 0, padx = 10, pady = 3, sticky = NW)
     
-            self.lastname = Entry(self.terceiroContainer)
-            self.lastname["width"] = 30
+            self.lastname = Entry(self.primeiroContainer)
+            self.lastname["width"] = 25
             self.lastname["font"] = fontePadrao
-            self.lastname.pack(side=LEFT)
+            self.lastname.grid(row = 1, column = 1, padx = 0, pady = 3, sticky = NW)
             
-            # elementos do quarto container
-            self.titleLabel = Label(self.quartoContainer)
+            self.titleLabel = Label(self.primeiroContainer)
             self.titleLabel["text"] = "Title\t"
             self.titleLabel["font"] = fontePadrao
-            self.titleLabel.pack(side=LEFT)
+            self.titleLabel.grid(row = 2, column = 0, padx = 15, pady = 3, sticky = NW)
       
-            self.title = Entry(self.quartoContainer)
-            self.title["width"] = 30
+            self.title = Entry(self.primeiroContainer)
+            self.title["width"] = 25
             self.title["font"] = fontePadrao
-            self.title.pack(side=LEFT)
+            self.title.grid(row = 2, column = 1, padx = 0, pady = 3, sticky = NW)
             
-            # elementos do quinto container
+            self.passwordLabel = Label(self.primeiroContainer)
+            self.passwordLabel["text"] = "Password"
+            self.passwordLabel["font"] = fontePadrao
+            self.passwordLabel.grid(row = 3, column = 0, padx = 0, pady = 0, sticky = NW)
+            
+            self.password = Entry(self.primeiroContainer)
+            self.password["width"] = 25
+            self.password["font"] = fontePadrao
+            self.password["show"] = "*"
+            self.password.grid(row = 3, column = 1, padx = 0, pady = 0, sticky = NW)
+            
             self.var = IntVar()
-            self.check = Checkbutton(self.quintoContainer)
+            self.check = Checkbutton(self.primeiroContainer)
             self.check["font"] = fontePadrao
             self.check["text"] = "Admin"
             self.check["variable"] = self.var
-            self.check.pack(side = LEFT)
+            self.check.grid(row = 2, column = 2, padx = 0, pady = 0, sticky = NE)
             
-            # elementos do sexto container
-            self.botaoLoad = Button(self.sextoContainer)
+            
+            self.botaoLoad = Button(self.primeiroContainer)
             self.botaoLoad["text"] = "LOAD"
             self.botaoLoad["font"] = fontePadrao
             self.botaoLoad["command"] = self.showinput
-            self.botaoLoad["width"] = 30
-            self.botaoLoad.pack()
+            self.botaoLoad["width"] = 15
+            self.botaoLoad.grid(row = 4, column = 1, padx = 0, pady = 0, sticky = NW)
             
-            #elementos do setimo container
-            self.msg = Message(self.setimoContainer)
+            self.msg = Message(self.primeiroContainer)
             self.msg["text"] = "First Name: \n Last Name: \n Title: \n Admin:"
             self.msg["relief"] = SUNKEN
-            self.msg.pack(fill = X, expand = YES)
+            self.msg.grid(row = 5, column = 1, padx = 0, pady = 0, sticky = NW)
             
-            # elementos do oitavo container
-            self.botaoMainMenu = Button(self.oitavoContainer)
+            self.botaoMainMenu = Button(self.primeiroContainer)
             self.botaoMainMenu["text"] = "MAIN MENU"
             self.botaoMainMenu["font"] = fontePadrao
-            self.botaoMainMenu["width"] = 10
+            self.botaoMainMenu["width"] = 15
             self.botaoMainMenu["command"] = returntohome
-            self.botaoMainMenu.pack(side = LEFT)
+            self.botaoMainMenu.grid(row = 6, column = 0, padx = 0, pady = 0, sticky = NW)
             
-            self.botaoCancel = Button(self.oitavoContainer)
+            self.botaoCancel = Button(self.primeiroContainer)
             self.botaoCancel["text"] = "CANCEL"
-            self.botaoCancel["width"] = 10
+            self.botaoCancel["width"] = 15
             self.botaoCancel["font"] = fontePadrao
             self.botaoCancel["command"] = self.eraseinput
-            self.botaoCancel.pack(side = LEFT)
+            self.botaoCancel.grid(row = 6, column = 1, padx = 0, pady = 0, sticky = NW)
             
-            self.botaoFingerprint = Button(self.oitavoContainer)
+            self.botaoFingerprint = Button(self.primeiroContainer)
             self.botaoFingerprint["text"] = "FINGERPRINT"
-            self.botaoFingerprint["width"] = 10
+            self.botaoFingerprint["width"] = 15
             self.botaoFingerprint["command"] = self.enabledb
-            self.botaoFingerprint.pack(side = LEFT)
+            self.botaoFingerprint.grid(row = 6, column = 2, padx = 0, pady = 0, sticky = NW)
+
+
 
         def showinput(self):
             # capta variaveis digitadas no objeto entry
