@@ -133,7 +133,9 @@ def telaseis():
                 vetor.insert(i,numero[0]) 
                 i += 1
             
-            cursor.execute("""SELECT pos_number FROM optima WHERE member_id=?""", (str(vetor[numIdx])))
+            print(type(vetor[numIdx]))
+            
+            cursor.execute("""SELECT pos_number FROM optima WHERE member_id=?""", (vetor[numIdx],))
             
             indSensor = cursor.fetchall()
             
@@ -148,7 +150,7 @@ def telaseis():
             try:
                 self.apagaIndex(int(vetor_aux[0]))#Deleting the fingerprint by Index in Sensor
                 
-                cursor.execute("""DELETE FROM optima WHERE member_id=?""",(str(vetor[numIdx])))
+                cursor.execute("""DELETE FROM optima WHERE member_id=?""", (vetor[numIdx],))
                 
                 conn.commit()
                 conn.close()

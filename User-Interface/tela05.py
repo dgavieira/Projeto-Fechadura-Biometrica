@@ -95,10 +95,9 @@ def telacinco():
             self.prompt.delete(1.0,END)
             msg = "Executing Fingerprint Enroll"
             path = '/home/pi/github/Projeto-Fechadura-Biometrica/pyfingerprint/src/files/examples/example_enroll.py'
-            #path = '/home/pi/git-batch/projeto-fechadura/Projeto-Fechadura/User-Interface/Alternate-GUI/fpsim.py'
-
+            
             #rotina de subprocesso - ESTA FUNCIONANDO - nao mexa nem tente entender
-            process = subprocess.Popen(['lxterminal','-e','python', path],
+            process = subprocess.Popen(['lxterminal','-e','python3', path],
                                                                stdout = subprocess.PIPE,
                                                                stderr = subprocess.PIPE,
                                                                stdin = subprocess.PIPE)
