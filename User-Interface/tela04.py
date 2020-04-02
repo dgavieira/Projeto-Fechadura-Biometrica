@@ -92,8 +92,7 @@ def telaquatro():
             self.check["font"] = fontePadrao
             self.check["text"] = "Admin"
             self.check["variable"] = self.var
-            self.check.grid(row = 2, column = 2, padx = 0, pady = 0, sticky = NE)
-            
+            self.check.grid(row = 2, column = 2, padx = 0, pady = 0, sticky = NW)
             
             self.botaoLoad = Button(self.primeiroContainer)
             self.botaoLoad["text"] = "LOAD"
@@ -116,7 +115,7 @@ def telaquatro():
             
             self.botaoCancel = Button(self.primeiroContainer)
             self.botaoCancel["text"] = "CANCEL"
-            self.botaoCancel["width"] = 15
+            self.botaoCancel["width"] = 24
             self.botaoCancel["font"] = fontePadrao
             self.botaoCancel["command"] = self.eraseinput
             self.botaoCancel.grid(row = 6, column = 1, padx = 0, pady = 0, sticky = NW)
@@ -157,9 +156,8 @@ def telaquatro():
             p_title = self.title.get()
             p_password = self.password.get()
             p_admin = self.var.get()
-
+            
             # apaga o que foi mostrado no widget msg
-
             if ((p_first_name != "") and (p_last_name != "") and (p_title != "") and (p_admin == 1) or (p_admin == 0)):
                 self.msg["text"] = "First Name: \n Last Name: \n Title: \n Admin:"
                 self.botaoLoad["state"] = NORMAL
@@ -176,9 +174,8 @@ def telaquatro():
                 del(p_admin)
                 self.botaoFingerprint["state"] = NORMAL
             else:
-                pass
+               pass
             
-
         # insere a entrada de usuario no banco de dados
         def enabledb(self):
             #get info by user on entry input
@@ -193,8 +190,7 @@ def telaquatro():
             # converte as strings para minusculas
             pfirstname = p_first_name.casefold()
             plastname = p_last_name.casefold()
-            ptitle = p_title.casefold()
-
+            
             try:
                 #escreve valores no banco
                 conn = sqlite3.connect('optima.db')
@@ -232,6 +228,7 @@ def telaquatro():
                 tela05.telacinco()
                 
             except: #se o python levantar uma excecao - ocorre esse loop
+                
                 if self.msg["text"] == "First Name: " + p_first_name + "\n Last Name: " + p_last_name + "\n Title: " + p_title + "\n Admin: YES":
                     self.msg["text"] = "Name already enrolled. Input new data."
                     self.botaoLoad["state"] = DISABLED
@@ -265,6 +262,7 @@ def telaquatro():
                 else:
                     self.msg["text"] = "First Name: \n Last Name: \n Title: \n Admin:"
                     
+                    
     def returntohome(): #metodo de retornar a tela principal
         fechar()
         tela01.telaum()
@@ -282,4 +280,3 @@ def telaquatro():
 
 if __name__ == "__main__":  # permite executar esse script como principal
     telaquatro()
-
