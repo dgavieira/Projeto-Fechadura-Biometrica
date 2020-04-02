@@ -252,3 +252,5 @@ leonardo arcanjo tecnico 31/03/2020 15:03:56 Entrada
 leonardo arcanjo tecnico 31/03/2020 15:04:05 Saida
 leonardo arcanjo tecnico 31/03/2020 15:05:04 Entrada
 leonardo arcanjo tecnico 31/03/2020 15:05:12 Saida
+antonio arcanjo visitante 02/04/2020 12:22:21 Entrada
+antonio arcanjo visitante 02/04/2020 12:22:34 Saida

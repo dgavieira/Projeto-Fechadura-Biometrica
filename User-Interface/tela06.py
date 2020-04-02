@@ -134,9 +134,7 @@ def telaseis():
                 vetor.insert(i,numero[0]) 
                 i += 1
             
-            print(type(vetor[numIdx]))
-            
-            cursor.execute("""SELECT pos_number FROM optima WHERE member_id=?""", (vetor[numIdx],))
+            cursor.execute("""SELECT pos_number, last_name FROM optima WHERE member_id=?""", (vetor[numIdx],))
             
             indSensor = cursor.fetchall()
             
@@ -146,18 +144,23 @@ def telaseis():
             #for loop to take the only content of tuple list that's the Sensor index that it'll delete
             #on Sensor memory
             for indexSen in indSensor:
-                vetor_aux.insert(0,indexSen[0])
-            
+                for j in indexSen:
+                    vetor_aux.insert(i,indexSen[i])
+                    i += 1
+                
             try:
                 self.apagaIndex(int(vetor_aux[0]))#Deleting the fingerprint by Index in Sensor
                 
                 cursor.execute("""DELETE FROM optima WHERE member_id=?""", (vetor[numIdx],))
-                
+                #print("apagando a linha associada a esta posicao do member_id",vetor[numIdx])
                 conn.commit()
                 conn.close()
             except TypeError:
-                print("Nao ha index associado a este usuario")
-            
+                #print("apagando a linha associada a esta posicao do last_name",vetor_aux[1])
+                cursor.execute("""DELETE FROM optima WHERE last_name=?""", (vetor_aux[1],))
+                
+                conn.commit()
+                conn.close()
                         
         def fetch_data(self): #database query main loop
             conn = sqlite3.connect('/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/optima.db')  #instancia o banco de dados
