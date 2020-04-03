@@ -31,7 +31,7 @@ cursor.execute("""CREATE TABLE IF NOT EXISTS optima (
             last_name TEXT NOT NULL,
             title TEXT NOT NULL,
             admin integer,
-            senhas TEXT,
+            senhas TEXT NOT NULL,
             UNIQUE (first_name, last_name))""" #cria indexação exclusiva para evitar duplicatas
             )
 conn.commit()
@@ -69,7 +69,7 @@ def telaquatro():
             self.titleLabel = Label(self.primeiroContainer)
             self.titleLabel["text"] = "Title\t"
             self.titleLabel["font"] = fontePadrao
-            self.titleLabel.grid(row = 2, column = 0, padx = 15, pady = 3, sticky = NW)
+            self.titleLabel.grid(row = 2, column = 0, padx = 10, pady = 3, sticky = NW)
       
             self.title = Entry(self.primeiroContainer)
             self.title["width"] = 25
@@ -79,7 +79,7 @@ def telaquatro():
             self.passwordLabel = Label(self.primeiroContainer)
             self.passwordLabel["text"] = "Password"
             self.passwordLabel["font"] = fontePadrao
-            self.passwordLabel.grid(row = 3, column = 0, padx = 0, pady = 0, sticky = NW)
+            self.passwordLabel.grid(row = 3, column = 0, padx = 10, pady = 0, sticky = NW)
             
             self.password = Entry(self.primeiroContainer)
             self.password["width"] = 25
@@ -98,7 +98,7 @@ def telaquatro():
             self.botaoLoad["text"] = "LOAD"
             self.botaoLoad["font"] = fontePadrao
             self.botaoLoad["command"] = self.showinput
-            self.botaoLoad["width"] = 15
+            self.botaoLoad["width"] = 22
             self.botaoLoad.grid(row = 4, column = 1, padx = 0, pady = 0, sticky = NW)
             
             self.msg = Message(self.primeiroContainer)
@@ -134,7 +134,6 @@ def telaquatro():
             p_first_name = self.firstname.get()
             p_last_name = self.lastname.get()
             p_title = self.title.get()
-            p_password = self.password.get()
             p_admin = self.var.get()
 
             #troca texto para string com dados adicionados
@@ -143,6 +142,7 @@ def telaquatro():
             if self.msg["text"] == "First Name: \n Last Name: \n Title: \n Admin:":
                 if p_admin == 1:
                     self.msg["text"] = "First Name: " + p_first_name + "\n Last Name: " + p_last_name + "\n Title: " + p_title + "\n Admin: YES"
+                    p_password = self.password.get()
                     self.botaoLoad["state"] = DISABLED
                 if p_admin == 0:
                     self.msg["text"] = "First Name: " + p_first_name + "\n Last Name: " + p_last_name + "\n Title: " + p_title + "\n Admin: NO"
@@ -195,11 +195,20 @@ def telaquatro():
                 #escreve valores no banco
                 conn = sqlite3.connect('optima.db')
                 cursor = conn.cursor()
-                cursor.execute("""
-                    INSERT INTO optima (first_name, last_name, title, admin, senhas)
-                    VALUES (?, ?, ?, ?, ?)
-                    """, (pfirstname, plastname, ptitle, p_admin, p_password)
-                    )
+                
+                if p_admin == 1:
+                    cursor.execute("""
+                        INSERT INTO optima (first_name, last_name, title, admin, senhas)
+                        VALUES (?, ?, ?, ?, ?)
+                        """, (pfirstname, plastname, p_title, p_admin, p_password)
+                        )
+                else:
+                    cursor.execute("""
+                        INSERT INTO optima (first_name, last_name, title, admin)
+                        VALUES (?, ?, ?, ?)
+                        """, (pfirstname, plastname, p_title, p_admin)
+                        )
+                
                 conn.commit()
                 conn.close()
                 fechar()
@@ -228,7 +237,6 @@ def telaquatro():
                 tela05.telacinco()
                 
             except: #se o python levantar uma excecao - ocorre esse loop
-                
                 if self.msg["text"] == "First Name: " + p_first_name + "\n Last Name: " + p_last_name + "\n Title: " + p_title + "\n Admin: YES":
                     self.msg["text"] = "Name already enrolled. Input new data."
                     self.botaoLoad["state"] = DISABLED
@@ -236,6 +244,7 @@ def telaquatro():
                     self.check.toggle()
                     self.firstname.delete(0,END)
                     self.lastname.delete(0,END)
+                    self.password.delete(0,END)
                     self.title.delete(0,END)
                     del(p_first_name)
                     del(p_last_name)
