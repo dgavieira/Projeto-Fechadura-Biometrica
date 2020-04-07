@@ -87,19 +87,6 @@ def teladois():
             self.home.pack(side=BOTTOM)
 
         # metodos
-        """def verificaSenha(self):
-            usuario = self.nome.get()
-            senha = self.senha.get()
-
-            if usuario == "cotta" and senha == "admin" or usuario == "leonardo" and senha == "admin":
-                self.mensagem["text"] = "Access Granted"
-                fechar()
-                tela03.telatres()
-            else:
-                self.mensagem["text"] = "Access Denied"
-                # fechar()
-        """
-        
         def verificaSenha(self):
             usuario = self.nome.get()
             senha = self.senha.get()
@@ -107,31 +94,37 @@ def teladois():
             puser = usuario.casefold()
             ppassword = senha.casefold()
             
-            conn = sqlite3.connect('/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/optima.db')
-            cursor = conn.cursor()
-            
-            cursor.execute("""SELECT senhas, admin FROM optima WHERE first_name=?""", (puser,))
-            
-            row = cursor.fetchall()
-            
-            conn.commit()
-            conn.close()
-            
-            vetor = []
-            i = 0
-            
-            for j in row[0]:
-                vetor.insert(i,j)
-                i += 0
-            
-            if (vetor[0] == 1) and (vetor[1] == ppassword):
-                self.mensagem['text'] = "Access Allow"
-                fechar()
-                tela03.telatres()
-            elif (vetor[0] == 1) and (vetor[1] != ppassword):
-                self.mensagem['text'] = "Password Wrong"
-            else:
-                self.mensagem['text'] = "Access Denied"
+            #tenta conectar o usuario de acordo com o nome digitado, senão existir executa-se a excessao
+            try:
+                conn = sqlite3.connect('/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/optima.db')
+                cursor = conn.cursor()
+                
+                cursor.execute("""SELECT senhas, admin FROM optima WHERE first_name=?""", (puser,))
+                
+                row = cursor.fetchall()
+                
+                conn.commit()
+                conn.close()
+                
+                vetor = []
+                i = 0
+                
+                for j in row[0]:
+                    vetor.insert(i,j)
+                    i += 0
+                
+                if (vetor[0] == 1) and (vetor[1] == ppassword):
+                    self.mensagem['text'] = "Access Allow"
+                    fechar()
+                    tela03.telatres()
+                elif (vetor[0] == 1) and (vetor[1] != ppassword):
+                    self.mensagem['text'] = "Password Wrong"
+                else:
+                    self.mensagem['text'] = "Access Denied"
+                
+            except:
+                self.mensagem['text'] = "User does not exist"
+                
 
     # metodo de retorno a tela um - chamado pelo comando do botao MAIN MENU
     def returntohome():
