@@ -265,3 +265,7 @@ leonardo arcanjo tecnico 03/04/2020 13:54:35 Entrada
 leonardo arcanjo tecnico 03/04/2020 13:54:44 Saida
 leonardo arcanjo tecnico 03/04/2020 13:56:57 Entrada
 leonardo arcanjo tecnico 03/04/2020 13:57:07 Saida
+leonardo arcanjo Tecnico 07/04/2020 15:11:40 Entrada
+leonardo arcanjo Tecnico 07/04/2020 15:11:49 Saida
+leonardo arcanjo Tecnico 07/04/2020 15:34:35 Entrada
+leonardo arcanjo Tecnico 07/04/2020 15:35:02 Saida
