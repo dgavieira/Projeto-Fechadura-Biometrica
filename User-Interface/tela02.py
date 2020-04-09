@@ -16,7 +16,7 @@ except ImportError:
     from tkinter import *
 
 import tela01, tela03
-import sqlite3
+import sqlite3, hashlib
 
 #essa tela ainda precisa ser trocada pra chamar via fingerprint
 
@@ -92,10 +92,12 @@ def teladois():
             senha = self.senha.get()
             
             puser = usuario.casefold()
-            ppassword = senha.casefold()
             
             #tenta conectar o usuario de acordo com o nome digitado, senão existir executa-se a excessao
             try:
+                senha = senha.encode('utf-8')
+                senha = hashlib.sha256(senha).hexdigest()
+                
                 conn = sqlite3.connect('/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/optima.db')
                 cursor = conn.cursor()
                 
@@ -113,11 +115,11 @@ def teladois():
                     vetor.insert(i,j)
                     i += 0
                 
-                if (vetor[0] == 1) and (vetor[1] == ppassword):
+                if (vetor[0] == 1) and (vetor[1] == senha):
                     self.mensagem['text'] = "Access Allow"
                     fechar()
                     tela03.telatres()
-                elif (vetor[0] == 1) and (vetor[1] != ppassword):
+                elif (vetor[0] == 1) and (vetor[1] != senha):
                     self.mensagem['text'] = "Password Wrong"
                 else:
                     self.mensagem['text'] = "Access Denied"

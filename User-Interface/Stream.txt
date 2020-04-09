@@ -269,3 +269,8 @@ leonardo arcanjo Tecnico 07/04/2020 15:11:40 Entrada
 leonardo arcanjo Tecnico 07/04/2020 15:11:49 Saida
 leonardo arcanjo Tecnico 07/04/2020 15:34:35 Entrada
 leonardo arcanjo Tecnico 07/04/2020 15:35:02 Saida
+leonardo arcanjo Tecnico 09/04/2020 08:55:05 Entrada
+leonardo arcanjo Tecnico 09/04/2020 08:55:16 Saida
+silvio pulga Reitor 09/04/2020 11:57:24 Entrada
+silvio pulga Reitor 09/04/2020 12:04:04 Saida
+leonardo arcanjo Tecnico 09/04/2020 12:06:18 Entrada

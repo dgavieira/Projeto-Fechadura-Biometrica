@@ -18,7 +18,7 @@ except ImportError:
 #importa arquivos de telas que interagem com a atual
 import tela01, tela05, tela06
 #importa bibliotecas adicionais utilizadas pelos metodos da classe
-import sqlite3, logging, time
+import sqlite3, logging, time, hashlib
 
 #cria arquivo de banco de dados e cursor
 conn = sqlite3.connect('/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/optima.db')
@@ -192,6 +192,8 @@ def telaquatro():
             plastname = p_last_name.casefold()
             
             try:
+                p_password = p_password.encode('utf-8')
+                p_password = hashlib.sha256(p_password).hexdigest()
                 #escreve valores no banco
                 conn = sqlite3.connect('optima.db')
                 cursor = conn.cursor()
@@ -218,8 +220,6 @@ def telaquatro():
                 # creating custom logger
                 # algumas IDEs precisam que o logger seja criado na mao
                 logger = logging.getLogger(__name__)
-                #handler setting
-                f_handler = logging.FileHandler('datalog-teste.txt')
                 # handler setting
                 f_handler = logging.FileHandler('datalog.txt')
                 f_handler.setLevel(logging.DEBUG)
