@@ -30,14 +30,17 @@ try:
 except Exception as e:
     print('Exception message: ' + str(e))
 
+
 def acendeLed(pino_led):
     gpio.output(pino_led, 1)
     return
+
 
 def apagaLed(pino_led):
     gpio.setmode(gpio.BOARD)
     gpio.output(pino_led,0)
     return
+
 
 def teladez():
     class ScreenTen:
@@ -68,13 +71,20 @@ def teladez():
             
         def connectSensor(self):
             #this function tries to connect the Fingerprint sensor e shows message of confirmation or not
+            try:
+                if (f.verifyPassword() == True):
+                    self.showMessage("Sensor Connect\n")
+                else:
+                    self.showMessage("Sensor not Connected\n")
+                    exit(1)
+                    fechar()
+            except Exception as e:
+                self.showMessage("Sensor not connected\n")
+                self.showMessage("Error: " + str(e) + "\n")
+                self.widget2.after(2000, fechar)
+                #exit(1)
+                #fechar()
             
-            if (f.verifyPassword() == True):
-                self.showMessage("Sensor Connect\n")
-            else:
-                self.showMessage("Sensor not Connected\n")
-                exit(1)
-                fechar()
             
             self.showMessage("Waiting for finger...\n")
             
@@ -90,7 +100,8 @@ def teladez():
             else:
                 pisca_led(LED_GREEN)
                 self.DBAcess(positionIndex)
-            
+
+
             unlockDoor()
             
             self.widget2.after(3000, fechar)
@@ -172,9 +183,9 @@ def teladez():
         gpio.setmode(gpio.BOARD)
         gpio.setup(LOCK_PIN, gpio.OUT)
         gpio.output(LOCK_PIN, 1)
-        time.sleep(1)
+        time.sleep(0.5)
         gpio.output(LOCK_PIN, 0)
-        time.sleep(1)
+        time.sleep(0.5)
         gpio.cleanup()
     
     root = Tk()

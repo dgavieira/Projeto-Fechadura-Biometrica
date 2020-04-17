@@ -114,6 +114,7 @@ def teladois():
                 for j in row[0]:
                     vetor.insert(i,j)
                     i += 0
+
                 
                 if (vetor[0] == 1) and (vetor[1] == senha):
                     self.mensagem['text'] = "Access Allow"
@@ -124,26 +125,29 @@ def teladois():
                 else:
                     self.mensagem['text'] = "Access Denied"
                 
+                
             except:
                 self.mensagem['text'] = "User does not exist"
-                
+
 
     # metodo de retorno a tela um - chamado pelo comando do botao MAIN MENU
     def returntohome():
         fechar()
         tela01.telaum()
 
+
     def fechar():
         root.destroy()
 
-    # loop de inicializacao da tela
 
+    # loop de inicializacao da tela
     root = Tk()
     ScreenTwo(root)
     root.title("Admin Access")
     root.geometry('478x270')
     # root.overrideredirect(True)
     root.mainloop()
+
 
 if __name__ == "__main__": #permite executar esse script como principal
     teladois()

@@ -33,49 +33,58 @@ def telatres():
             self.button1["font"] = fontePadrao
             self.button1["width"] = 30
             self.button1["height"] = 2
-            self.button1["command"] = doublefuncenroll
+            self.button1["command"] = doubleFuncEnroll
             self.button1.pack()
 
             #construtor do botao DELETE
             self.button2 = Button(self.widget1, text = "DELETE", font = fontePadrao,
-                                  width = 30, height = 2, command = gotodelete)
+                                  width = 30, height = 2, command = goToDelete)
             self.button2.pack()
             
-            #construtor do botao EXIT
+            #construtor do botao CANCEL
             self.button3 = Button(self.widget1)
             self.button3["text"] = "CANCEL"
             self.button3["font"] = fontePadrao
             self.button3["width"] = 30
             self.button3["height"] = 1
-            self.button3["command"] = doublefuncexit
+            self.button3["command"] = doubleFuncExit
             self.button3.pack()
             
-            #construtor do botao CANCEL
+            #construtor do botao EXIT
             self.button4 = Button(self.widget1)
             self.button4['text'] = "EXIT"
             self.button4['font'] = fontePadrao
             self.button4['width'] = 30
             self.button4['height'] = 1
-            self.button4['command'] = fechar
+            self.button4['command'] = closeApp
             self.button4.pack()
          
     #metodos da tela 03 - destroem tela atual e abrem tela referente de acordo com o fluxo da UI
 
-    def doublefuncenroll():
+    def doubleFuncEnroll():
         fechar()
         tela04.telaquatro()
 
+
     # funcao de retornar para tela inicial
-    def doublefuncexit():
+    def doubleFuncExit():
         fechar()
         tela01.telaum()
 
+
     def fechar():
         root.destroy()
-        
-    def gotodelete():
+
+
+    def closeApp():
+        fechar()
+        exit(0)
+
+
+    def goToDelete():
         fechar()
         tela06.telaseis()
+
 
     #execucao da tela
     root = Tk()
@@ -84,6 +93,7 @@ def telatres():
     root.geometry('478x270')
     root.mainloop()
     # root.overrideredirect(True)
+
 
 if __name__ == "__main__":  # permite executar esse script como principal
     telatres()
