@@ -1,0 +1,25 @@
+How to install Fechadura GUI application desktop boot 
+
+1 - Create a directory 'autostart' in /home/pi/.config if it's not created
+before. E.g: mkdir /home/pi/.config/autostart/
+
+2 - Move to this directory and create a name.desktop file with the following
+statements:
+
+------------------------------------------------------
+[Desktop Entry]
+
+Name=Name Application
+Type=Application
+Comment=Some Comments about your program
+Exec=/usr/bin/python3 {write the all file path}.py
+------------------------------------------------------
+
+PS: Note that i used the 'python3' that means i used python 3.7. 
+You can replace for the 'python' to use python 2.7 
+
+3 - Allow file to be executable
+
+$ sudo chmod +x /home/pi/.config/autostart/name.desktop
+
+4 - Reboot and wait the python GUI run.
