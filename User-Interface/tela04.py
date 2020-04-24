@@ -284,7 +284,7 @@ def telaquatro():
     ScreenFour(root)
     root.title("Enroll Screen")
     root.geometry('478x270')
-    #root.overrideredirect(True)
+    root.attributes("-fullscreen",True)
     root.mainloop()
 
 if __name__ == "__main__":  # permite executar esse script como principal

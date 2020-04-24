@@ -12,11 +12,15 @@ statements:
 Name=Name Application
 Type=Application
 Comment=Some Comments about your program
-Exec=/usr/bin/python3 {write the all file path}.py
+Exec= lxterminal -e {write the all file path}.sh
+#Exec=/usr/bin/python3 {write the all file path}.py
 ------------------------------------------------------
 
 PS: Note that i used the 'python3' that means i used python 3.7. 
 You can replace for the 'python' to use python 2.7 
+
+PS1: After some test, it discover that statement "Exec" with "/usr/bin/python3" attribute causes a bug in tela05.py. 
+So, it was changed to a new attribute to a file .sh that runs the .py file.
 
 3 - Allow file to be executable
 

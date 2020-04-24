@@ -90,9 +90,9 @@ def telatres():
     root = Tk()
     ScreenThree(root)
     root.title("ADM Level Menu Screen")
-    root.geometry('478x270')
+    root.geometry('478x320')
     root.mainloop()
-    # root.overrideredirect(True)
+    root.overrideredirect(True)
 
 
 if __name__ == "__main__":  # permite executar esse script como principal

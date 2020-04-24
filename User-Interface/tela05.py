@@ -37,9 +37,6 @@ def telacinco():
             self.terceiroContainer["padx"] = 20
             self.terceiroContainer.pack()
             
-            self.quartoContainer = Frame(master)
-            self.quartoContainer["padx"] = 20
-            self.quartoContainer.pack()
             
             #elementos do primeiro Container
             #construtor dos objetos do layout
@@ -72,19 +69,12 @@ def telacinco():
 
             #preguica de mexer no layout
             self.loadButton = Button(self.terceiroContainer)
-            self.loadButton["text"] = "LOAD"
+            self.loadButton["text"] = "OK"
             self.loadButton["font"] = fonteBotoes
             self.loadButton["width"] = 10
-            #self.loadButton["command"] = self.load_db
+            self.loadButton["command"] = self.conclude
             self.loadButton.pack(side = LEFT)
                         
-            #elementos do quarto container
-            self.okButton = Button(self.quartoContainer)
-            self.okButton["text"] = "OK"
-            self.okButton["font"] = fonteBotoes
-            self.okButton["command"] = self.conclude
-            self.okButton["width"] = 10
-            self.okButton.pack()
             
         #metodos da classe    
         def ret_screen_four(self): #retorna a tela anterior - comandado por botao RETURN
@@ -118,8 +108,8 @@ def telacinco():
     root = Tk()
     ScreenFive(root)
     root.title('Fingerprint Calibration Screen')
-    root.geometry('478x270')
-    #root.overrideredirect(True)
+    root.geometry('478x320')
+    root.attributes("-fullscreen",True)
     root.mainloop()
 
 if __name__ == "__main__":  # permite executar esse script como principal

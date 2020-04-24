@@ -193,7 +193,8 @@ def teladez():
     root = Tk()
     ScreenTen(root)
     root.title("Check-in Screen")
-    root.geometry("478x270")
+    root.geometry("478x320")
+    root.overrideredirect(True)
     root.mainloop()
 
 if __name__ == "__main__":

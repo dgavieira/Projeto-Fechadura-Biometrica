@@ -34,7 +34,7 @@ def telaum():
             self.button1 = Button(self.widget1)
             self.button1["text"] = "OPTIONS"
             self.button1["font"] = fontePadrao
-            self.button1["height"] = 3
+            self.button1["height"] = 4
             self.button1["command"] = doublefuncoptions
             self.button1.pack(side = TOP, fill=X)
 
@@ -42,7 +42,7 @@ def telaum():
             self.button2 = Button(self.widget1)
             self.button2["text"] = "OPEN THE DOOR"
             self.button2["font"] = fontePadrao
-            self.button2["height"] = 4
+            self.button2["height"] = 5
             self.button2["command"] = openDoor
             self.button2.pack(side = TOP, fill=X)
             
@@ -82,10 +82,11 @@ def telaum():
     root = Tk()
     ScreenOne(root)
     root.title("Main Screen")
-    root.geometry('478x270')
+    root.geometry('478x320')
+    root.overrideredirect(True) #trava ponteiro do mouse e força app no primeiro plano
     root.after(200, checkButton)
     root.mainloop()
-    #root.overrideredirect(True) #trava ponteiro do mouse e força app no primeiro plano
+    
     
 if __name__ == "__main__": #permite executar esse script como principal
     telaum()

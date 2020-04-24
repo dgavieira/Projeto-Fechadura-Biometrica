@@ -154,7 +154,8 @@ def telaoito():
     root = Tk()
     ScreenEight(root)
     root.title("Checkout Screen")
-    root.geometry('478x270')
+    root.geometry('478x320')
+    root.overrideredirect(True)
     root.mainloop()
     
 if __name__ == '__main__':
