@@ -5,6 +5,7 @@
 #INPUTS: optima.db
 #Especs: Touchscreen LCD 3,5" 480x320
 #Autor: Diego Vieira
+#Review: Leonardo Arcanjo
 #Revision: Leonardo Arcanjo
 #!/usr/local/bin/python
 # -*- coding: utf-8 -*-
@@ -37,7 +38,7 @@ def telaseis():
             
             #elementos do primeiro container
             self.lista = Listbox(self.primeiroContainer, width= 30, height = 10,
-                                 font = ('MS', '12'), selectmode = BROWSE)
+                                 font = ('MS', '13'), selectmode = BROWSE)
             
             self.scroll = Scrollbar(self.primeiroContainer, command = self.lista.yview)
             self.lista.configure(yscrollcommand = self.scroll.set)
@@ -48,27 +49,27 @@ def telaseis():
             
             #elementos do primeiro botao "UP"
             self.BotaoUp = Button(master, text = 'UP', font = self.fontePadrao,
-                                  width = 18, height = 5, command = self.ScrollUp)
+                                  width = 19, height = 7, command = self.ScrollUp)
             self.BotaoUp.grid(row = 0, column = 2, sticky = NW)
             
             #elementos do segundo botao "DOWN"
             self.BotaoDown = Button(master, text = 'DOWN', font = self.fontePadrao,
-                                    width = 18, height = 5, command = self.ScrollDown)
+                                    width = 19, height = 6, command = self.ScrollDown)
             self.BotaoDown.grid(row = 1, column = 2, sticky = NW)
             
             #elementos do terceiro botao "LOAD"
             self.BotaoLoad = Button(master, text = 'LOAD', font = self.fontePadrao,
-                                    width = 18, height = 3, command = self.fetch_data)
+                                    width = 20, height = 6, command = self.fetch_data)
             self.BotaoLoad.grid(row = 2, column = 0, sticky = SW)
             
             #elemento do quarto botao "BACK"
             self.BotaoBack = Button(master, text = "BACK", font = self.fontePadrao,
-                                    width = 18, height = 3, command = backtoenroll)
+                                    width = 21, height = 6, command = backtoenroll)
             self.BotaoBack.grid(row = 2, column = 1, sticky = SW)
             
             #elemento do quinto botao "DELETE"
             self.BotaoDelete = Button(master, text = "DELETE", font = self.fontePadrao,
-                                      width = 18, height = 3, command = self.run_listbox_delete)
+                                      width = 20, height = 6, command = self.run_listbox_delete)
             #A funcao delete chama a funcao run_listbox_delete
             self.BotaoDelete.grid(row = 2, column = 2, sticky = SW)
         
@@ -202,7 +203,7 @@ def telaseis():
     ScreenSix(root)
     root.title("Delete Screen")
     root.geometry('478x320')
-    root.overrideredirect(True)
+    root.attributes("-fullscreen",True)
     root.mainloop()
 
 if __name__ == "__main__":  # permite executar esse script como principal

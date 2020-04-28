@@ -38,7 +38,7 @@ def telaoito():
                                         sticky = NW)
             
             self.lista = Listbox(self.primeiroConteiner, width = 30, height = 10,
-                                 font = ('MS', '12'), selectmode = BROWSE)
+                                 font = ('MS', '13'), selectmode = BROWSE)
             self.scroll = Scrollbar(self.primeiroConteiner, command = self.lista.yview)
             self.lista.configure(yscrollcommand = self.scroll.set)
             self.lista.pack(side = LEFT)
@@ -47,23 +47,23 @@ def telaoito():
             self.fontePadrao = ('Arial', '10')
             
             self.BotaoUp = Button(master, text = 'UP', font = self.fontePadrao,
-                                  width = 18, height = 5, command = self.ScrollUp)
+                                  width = 19, height = 7, command = self.ScrollUp)
             self.BotaoUp.grid(row = 0, column = 2, sticky = NW)
             
             self.BotaoDown = Button(master, text = 'DOWN', font = self.fontePadrao,
-                                    width = 18, height = 5, command = self.ScrollDown)
+                                    width = 19, height = 6, command = self.ScrollDown)
             self.BotaoDown.grid(row = 1, column = 2, sticky = NW)
             
             self.BotaoQuit = Button(master, text = 'QUIT', font = ['Arial', '10', 'bold'],
-                                    width = 18, height = 3, command = self.toQuit)
+                                    width = 20, height = 6, command = self.toQuit)
             self.BotaoQuit.grid(row = 2, column = 2, sticky = SW)
             
             self.BotaoLoad = Button(master, text = 'LOAD', font = self.fontePadrao,
-                                    width = 18, height = 3, command = self.fetchData)
+                                    width = 20, height = 6, command = self.fetchData)
             self.BotaoLoad.grid(row = 2, column = 0, sticky = SW)
             
             self.BotaoBack = Button(master, text = 'BACK', font = self.fontePadrao,
-                                    width = 18, height = 3, command = backToMain)
+                                    width = 21, height = 6, command = backToMain)
             self.BotaoBack.grid(row = 2, column = 1, sticky = SW)
             
         def ScrollUp(self):
@@ -155,7 +155,7 @@ def telaoito():
     ScreenEight(root)
     root.title("Checkout Screen")
     root.geometry('478x320')
-    root.overrideredirect(True)
+    root.attributes("-fullscreen",True)
     root.mainloop()
     
 if __name__ == '__main__':

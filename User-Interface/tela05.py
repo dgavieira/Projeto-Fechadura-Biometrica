@@ -5,6 +5,7 @@
 #INPUTS: example_enroll.py
 #Especs: Touchscreen LCD 3,5" 480x320
 #Autor: Diego Vieira
+#Review: Leonardo Arcanjo
 #!/usr/local/bin/python
 # -*- coding: utf-8 -*-
 
@@ -31,6 +32,7 @@ def telacinco():
             
             self.segundoContainer = Frame(master)
             self.segundoContainer["padx"] = 20
+            self.segundoContainer["pady"] = 5
             self.segundoContainer.pack(fill = X, expand = YES)
             
             self.terceiroContainer = Frame(master)
@@ -48,10 +50,10 @@ def telacinco():
             #elementos do segundo Container
             self.prompt = Text(self.segundoContainer)
             self.prompt["relief"] = SUNKEN
-            self.prompt["height"] = 8
+            self.prompt["height"] = 10
             self.prompt.pack()
             
-            fonteBotoes = ("Arial","10")
+            fonteBotoes = ("Arial","12")
             #elementos do terceiro Container
             self.returnButton = Button(self.terceiroContainer)
             self.returnButton["text"] = "RETURN"

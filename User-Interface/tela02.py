@@ -4,6 +4,7 @@
 #Description:Starts the Fingerprint search loop only for ROOT ADM users
 #Especs: Touchscreen LCD 3,5" 480x320
 #Autor: Diego Vieira
+#Review: Leonardo Arcanjo
 #!/usr/local/bin/python
 #-*- coding: utf-8 -*-
 
@@ -144,8 +145,8 @@ def teladois():
     root = Tk()
     ScreenTwo(root)
     root.title("Admin Access")
-    root.geometry('478x270')
-    root.attributes(-"fullscreen",True)
+    root.geometry('478x320')
+    root.attributes("-fullscreen",True)
     root.mainloop()
 
 

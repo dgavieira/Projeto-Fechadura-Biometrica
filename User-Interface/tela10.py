@@ -4,6 +4,7 @@
 #Description: Check-in Screen for the User Interface
 #Especs: Touchscreen LCD 3,5" 480x320
 #Author: Leonardo Arcanjo
+#Review: Leonardo Arcanjo
 #!/usr/local/bin/python
 #-*- coding: uft-8 -*-
 
@@ -61,7 +62,7 @@ def teladez():
             
             self.texto = Text(self.widget2)
             self.texto["relief"] = SUNKEN
-            self.texto["height"] = 13
+            self.texto["height"] = 15
             self.texto.pack()
             
             configura_GPIO() #configura os GPIO
@@ -194,7 +195,7 @@ def teladez():
     ScreenTen(root)
     root.title("Check-in Screen")
     root.geometry("478x320")
-    root.overrideredirect(True)
+    root.attributes("-fullscreen", True)
     root.mainloop()
 
 if __name__ == "__main__":
