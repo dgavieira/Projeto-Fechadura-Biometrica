@@ -76,7 +76,7 @@ def telacinco():
             self.loadButton["width"] = 10
             self.loadButton["command"] = self.conclude
             self.loadButton.pack(side = LEFT)
-                        
+            
             
         #metodos da classe    
         def ret_screen_four(self): #retorna a tela anterior - comandado por botao RETURN

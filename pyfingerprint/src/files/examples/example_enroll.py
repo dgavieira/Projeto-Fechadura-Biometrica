@@ -12,9 +12,20 @@ import time
 from pyfingerprint.pyfingerprint import PyFingerprint
 #alterado
 import sqlite3
+import RPi.GPIO as gpio
+
+LED_RED = 40
+LED_GREEN = 38
+LED_BLUE = 36
 
 ## Enrolls new finger
 ##
+
+def configura_GPIO():
+    gpio.setmode(gpio.BOARD)
+    gpio.setup(LED_BLUE, gpio.OUT)
+    gpio.setup(LED_GREEN, gpio.OUT)
+    gpio.setup(LED_RED, gpio.OUT)
 
 ## Tries to initialize the sensor
 try:
@@ -23,11 +34,27 @@ try:
     if ( f.verifyPassword() == False ):
         raise ValueError('The given fingerprint sensor password is wrong!')
 
+    configura_GPIO()
+
 except Exception as e:
     print('The fingerprint sensor could not be initialized!')
     print('Exception message: ' + str(e))
+    acendeLed(LED_RED)
+    apagaLed(LED_RED)
+    acendeLed(LED_RED)
+    apagaLed(LED_RED)
     time.sleep(5)
     exit(1)
+
+def acendeLed(pino_led):
+    gpio.output(pino_led, 1)
+    return
+
+
+def apagaLed(pino_led):
+    gpio.output(pino_led, 0)
+    return
+
 
 ## Gets some sensor information
 print('Currently used templates: ' + str(f.getTemplateCount()) +'/'+ str(f.getStorageCapacity()))
@@ -35,6 +62,7 @@ print('Currently used templates: ' + str(f.getTemplateCount()) +'/'+ str(f.getSt
 ## Tries to enroll new finger
 try:
     print('Waiting for finger...')
+    acendeLed(LED_BLUE)
 
     ## Wait that finger is read
     while ( f.readImage() == False ):
@@ -48,11 +76,22 @@ try:
     positionNumber = result[0]
 
     if ( positionNumber >= 0 ):
+        apagaLed(LED_BLUE)
+        acendeLed(LED_RED)
+        apagaLed(LED_RED)
+        acendeLed(LED_RED)
+        apagaLed(LED_RED)
         print('Template already exists at position #' + str(positionNumber))
         time.sleep(5)
         exit(0)
 
     print('Remove finger...')
+    apagaLed(LED_BLUE)
+    acendeLed(LED_GREEN)
+    apagaLed(LED_GREEN)
+    acendeLed(LED_GREEN)
+    apagaLed(LED_GREEN)
+    acendeLed(LED_BLUE)
     time.sleep(2)
 
     print('Waiting for same finger again...')
@@ -66,6 +105,11 @@ try:
 
     ## Compares the charbuffers
     if ( f.compareCharacteristics() == 0 ):
+        apagaLed(LED_BLUE)
+        acendeLed(LED_RED)
+        apagaLed(LED_RED)
+        acendeLed(LED_RED)
+        apagaLed(LED_RED)
         raise Exception('Fingers do not match')
 
     ## Creates a template
@@ -78,7 +122,13 @@ try:
     #alterado
     print(positionNumber)
     #alterado
-    
+    apagaLed(LED_BLUE)
+    acendeLed(LED_GREEN)
+    apagaLed(LED_GREEN)
+    acendeLed(LED_GREEN)
+    apagaLed(LED_GREEN)
+    gpio.cleanup()
+
     #metodo de atualizar banco
     url = '/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/optima.db'
     conn = sqlite3.connect(url)
@@ -115,5 +165,6 @@ try:
 except Exception as e:
     print('Operation failed!')
     print('Exception message: ' + str(e))
+    apagaLed(LED_BLUE)
     time.sleep(5)
     exit(1)
