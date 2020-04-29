@@ -5,6 +5,7 @@
 #INPUTS: Name; Title; Button for Fingerprint Loop
 #Especs: Touchscreen LCD 3,5" 480x320
 #Autor: Diego Vieira
+#Review: Leonardo Arcanjo
 #!/usr/local/bin/python
 # -*- coding: utf-8 -*-
 
@@ -43,7 +44,7 @@ def telaquatro():
             self.primeiroContainer = Frame(master)
             self.primeiroContainer.grid(row = 0, column = 0, rowspan = 6, columnspan = 3, sticky = NW)
             
-            fontePadrao = ("Arial","10")
+            fontePadrao = ("Arial","12")
             
             #First Container Elements
             self.firstnameLabel = Label(self.primeiroContainer)
@@ -52,7 +53,7 @@ def telaquatro():
             self.firstnameLabel.grid(row = 0, column = 0, padx = 10, pady = 3, sticky = NW)
             
             self.firstname = Entry(self.primeiroContainer)
-            self.firstname["width"] = 25
+            self.firstname["width"] = 24
             self.firstname["font"] = fontePadrao
             self.firstname.grid(row = 0, column = 1, padx = 0, pady = 3, sticky = NW)
             
@@ -62,7 +63,7 @@ def telaquatro():
             self.lastnameLabel.grid(row = 1, column = 0, padx = 10, pady = 3, sticky = NW)
     
             self.lastname = Entry(self.primeiroContainer)
-            self.lastname["width"] = 25
+            self.lastname["width"] = 24
             self.lastname["font"] = fontePadrao
             self.lastname.grid(row = 1, column = 1, padx = 0, pady = 3, sticky = NW)
             
@@ -72,7 +73,7 @@ def telaquatro():
             self.titleLabel.grid(row = 2, column = 0, padx = 10, pady = 3, sticky = NW)
       
             self.title = Entry(self.primeiroContainer)
-            self.title["width"] = 25
+            self.title["width"] = 24
             self.title["font"] = fontePadrao
             self.title.grid(row = 2, column = 1, padx = 0, pady = 3, sticky = NW)
             
@@ -82,7 +83,7 @@ def telaquatro():
             self.passwordLabel.grid(row = 3, column = 0, padx = 10, pady = 0, sticky = NW)
             
             self.password = Entry(self.primeiroContainer)
-            self.password["width"] = 25
+            self.password["width"] = 24
             self.password["font"] = fontePadrao
             self.password["show"] = "*"
             self.password.grid(row = 3, column = 1, padx = 0, pady = 0, sticky = NW)
@@ -102,27 +103,28 @@ def telaquatro():
             self.botaoLoad.grid(row = 4, column = 1, padx = 0, pady = 0, sticky = NW)
             
             self.msg = Message(self.primeiroContainer)
-            self.msg["text"] = "First Name: \n Last Name: \n Title: \n Admin:"
+            self.msg["text"] = "First Name: \nLast Name: \nTitle: \nAdmin:"
             self.msg["relief"] = SUNKEN
             self.msg.grid(row = 5, column = 1, padx = 0, pady = 0, sticky = NW)
             
             self.botaoMainMenu = Button(self.primeiroContainer)
             self.botaoMainMenu["text"] = "MAIN MENU"
-            self.botaoMainMenu["font"] = fontePadrao
-            self.botaoMainMenu["width"] = 15
+            self.botaoMainMenu["width"] = 10
+            self.botaoMainMenu["height"] = 4
             self.botaoMainMenu["command"] = returntohome
             self.botaoMainMenu.grid(row = 6, column = 0, padx = 0, pady = 0, sticky = NW)
             
             self.botaoCancel = Button(self.primeiroContainer)
             self.botaoCancel["text"] = "CANCEL"
-            self.botaoCancel["width"] = 24
-            self.botaoCancel["font"] = fontePadrao
+            self.botaoCancel["width"] = 25
+            self.botaoCancel["height"] = 4
             self.botaoCancel["command"] = self.eraseinput
             self.botaoCancel.grid(row = 6, column = 1, padx = 0, pady = 0, sticky = NW)
             
             self.botaoFingerprint = Button(self.primeiroContainer)
             self.botaoFingerprint["text"] = "FINGERPRINT"
             self.botaoFingerprint["width"] = 15
+            self.botaoFingerprint["height"] = 4
             self.botaoFingerprint["command"] = self.enabledb
             self.botaoFingerprint.grid(row = 6, column = 2, padx = 0, pady = 0, sticky = NW)
 
@@ -139,16 +141,16 @@ def telaquatro():
             #troca texto para string com dados adicionados
             # escreve o que foi digitado no widget msg
 
-            if self.msg["text"] == "First Name: \n Last Name: \n Title: \n Admin:":
+            if self.msg["text"] == "First Name: \nLast Name: \nTitle: \nAdmin:":
                 if p_admin == 1:
-                    self.msg["text"] = "First Name: " + p_first_name + "\n Last Name: " + p_last_name + "\n Title: " + p_title + "\n Admin: YES"
+                    self.msg["text"] = "First Name: " + p_first_name + "\nLast Name: " + p_last_name + "\nTitle: " + p_title + "\nAdmin: YES"
                     p_password = self.password.get()
                     self.botaoLoad["state"] = DISABLED
                 if p_admin == 0:
-                    self.msg["text"] = "First Name: " + p_first_name + "\n Last Name: " + p_last_name + "\n Title: " + p_title + "\n Admin: NO"
+                    self.msg["text"] = "First Name: " + p_first_name + "\nLast Name: " + p_last_name + "\nTitle: " + p_title + "\nAdmin: NO"
                     self.botaoLoad["state"] = DISABLED
             else:
-                self.msg["text"] = "First Name: \n Last Name: \n Title: \n Admin:"
+                self.msg["text"] = "First Name: \nLast Name: \nTitle: \nAdmin:"
                 
         def eraseinput(self): #metodo que apaga a entrada digitada - comandado pelo botao CANCEL
             p_first_name = self.firstname.get()
@@ -159,7 +161,7 @@ def telaquatro():
             
             # apaga o que foi mostrado no widget msg
             if ((p_first_name != "") and (p_last_name != "") and (p_title != "") and (p_admin == 1) or (p_admin == 0)):
-                self.msg["text"] = "First Name: \n Last Name: \n Title: \n Admin:"
+                self.msg["text"] = "First Name: \nLast Name: \nTitle: \nAdmin:"
                 self.botaoLoad["state"] = NORMAL
                 if (p_admin == 1):
                     self.check.toggle()
