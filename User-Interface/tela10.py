@@ -30,7 +30,6 @@ try:
     f = PyFingerprint('/dev/ttyUSB0', 57600, 0xFFFFFFFF, 0x00000000)
 except Exception as e:
     print('Exception message: ' + str(e))
-    teladez.fechar()
     exit(1)
 
 
