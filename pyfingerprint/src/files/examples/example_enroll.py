@@ -39,10 +39,8 @@ try:
 except Exception as e:
     print('The fingerprint sensor could not be initialized!')
     print('Exception message: ' + str(e))
-    acendeLed(LED_RED)
-    apagaLed(LED_RED)
-    acendeLed(LED_RED)
-    apagaLed(LED_RED)
+    #if there is some communication sensor failure in this point the red led will blink once
+    piscaLed(LED_RED, 1)
     time.sleep(5)
     exit(1)
 
@@ -54,6 +52,15 @@ def acendeLed(pino_led):
 def apagaLed(pino_led):
     gpio.output(pino_led, 0)
     return
+
+#Turn off Blue Led and does the pin (another led color) blinks 'qtd' times 
+def piscaLed(pin, qtd):
+    apagaLed(LED_BLUE)
+    for i in range(qtd):
+        acendeLed(pin)
+        time.sleep(0.5)
+        apagaLed(pin)
+        time.sleep(0.5)
 
 
 ## Gets some sensor information
@@ -76,26 +83,18 @@ try:
     positionNumber = result[0]
 
     if ( positionNumber >= 0 ):
-        apagaLed(LED_BLUE)
-        acendeLed(LED_RED)
-        apagaLed(LED_RED)
-        acendeLed(LED_RED)
-        apagaLed(LED_RED)
         print('Template already exists at position #' + str(positionNumber))
+        #if the fingerprint already exists in the sensor memory the red led will blinks twice
+        piscaLed(LED_RED, 2)
         time.sleep(5)
         exit(0)
 
     print('Remove finger...')
     apagaLed(LED_BLUE)
-    acendeLed(LED_GREEN)
-    apagaLed(LED_GREEN)
-    acendeLed(LED_GREEN)
-    apagaLed(LED_GREEN)
-    acendeLed(LED_BLUE)
     time.sleep(2)
 
     print('Waiting for same finger again...')
-
+    acendeLed(LED_BLUE)
     ## Wait that finger is read again
     while ( f.readImage() == False ):
         pass
@@ -105,11 +104,8 @@ try:
 
     ## Compares the charbuffers
     if ( f.compareCharacteristics() == 0 ):
-        apagaLed(LED_BLUE)
-        acendeLed(LED_RED)
-        apagaLed(LED_RED)
-        acendeLed(LED_RED)
-        apagaLed(LED_RED)
+        #if the first and second read don't match the red led will blinks three times
+        piscaLed(LED_RED, 3)
         raise Exception('Fingers do not match')
 
     ## Creates a template
@@ -117,17 +113,13 @@ try:
 
     ## Saves template at new position number
     positionNumber = f.storeTemplate()
+    #if the fingerprint enrolled successfully the green will brinks twice
+    piscaLed(LED_VERDE, 1)
     print('Finger enrolled successfully!')
     print('New template position #' + str(positionNumber))
     #alterado
     print(positionNumber)
     #alterado
-    apagaLed(LED_BLUE)
-    acendeLed(LED_GREEN)
-    apagaLed(LED_GREEN)
-    acendeLed(LED_GREEN)
-    apagaLed(LED_GREEN)
-    gpio.cleanup()
 
     #metodo de atualizar banco
     url = '/home/pi/github/Projeto-Fechadura-Biometrica/User-Interface/optima.db'
@@ -165,6 +157,5 @@ try:
 except Exception as e:
     print('Operation failed!')
     print('Exception message: ' + str(e))
-    apagaLed(LED_BLUE)
     time.sleep(5)
     exit(1)
