@@ -114,7 +114,7 @@ try:
     ## Saves template at new position number
     positionNumber = f.storeTemplate()
     #if the fingerprint enrolled successfully the green will brinks twice
-    piscaLed(LED_VERDE, 1)
+    piscaLed(LED_GREEN, 2)
     print('Finger enrolled successfully!')
     print('New template position #' + str(positionNumber))
     #alterado
